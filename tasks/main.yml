@@ -2,12 +2,7 @@
   apt:
     name: "{{ item }}"
     state: installed
-  with_items:
-    - git
-    - curl
-    - wget
-    - rsync
-    - tmux
+  with_items: "{{ tools }}"
 
 - name: Install .tmux.git
   git:

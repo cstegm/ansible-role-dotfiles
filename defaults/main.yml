@@ -1,2 +1,8 @@
 homepath: "{{ ansible_env.HOME}}" 
 username: "{{ ansible_env.LOGNAME }}"
+tools:
+  - git
+  - curl
+  - wget
+  - rsync
+  - tmux
