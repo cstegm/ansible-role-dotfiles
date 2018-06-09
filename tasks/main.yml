@@ -1,0 +1,53 @@
+- name: Install Standard Tools
+  apt:
+    name: "{{ item }}"
+    state: installed
+  with_items:
+    - git
+    - curl
+    - wget
+    - rsync
+    - tmux
+
+- name: Install .tmux.git
+  git:
+    repo: "https://github.com/gpakosz/.tmux.git"
+    dest: "{{ homepath }}/.tmux"
+  become_user: "{{ username }}"
+
+
+- name: Symlink
+  file:
+    src: "{{ homepath }}/.tmux/.tmux.conf"
+    dest: "{{ homepath }}/.tmux.conf"
+    state: link
+
+- name: Deploy tmux.conf.local
+  copy:
+    src: .tmux.conf.local
+    dest: "{{ homepath }}/.tmux.conf.local"
+    owner: "{{ username }}"
+
+- name: Install liquidpormpt
+  git:
+    repo: "https://github.com/nojhan/liquidprompt.git"
+    dest: "{{ homepath }}/.liquidprompt"
+  become_user: "{{ username }}"
+
+- name: source liquidprompt in bashrc
+  lineinfile:
+    dest: "{{ homepath }}/.bashrc"
+    regexp: "source {{ homepath | regex_escape}}/\\.liquidprompt/liquidprompt"
+    line: "[[ $- = *i* ]] && source {{ homepath }}/.liquidprompt/liquidprompt"
+
+- name: export EDITOR in bashrc
+  lineinfile:
+    dest: "{{ homepath }}/.bashrc"
+    regexp: "^export EDITOR=vim"
+    line: "export EDITOR=vim"
+
+- name: "install .vimrc"
+  copy:
+    src: ".vimrc"
+    dest: "{{ homepath }}/.vimrc"
+    owner: "{{ username }}"

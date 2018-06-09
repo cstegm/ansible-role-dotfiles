@@ -1,0 +1,2 @@
+homepath: "{{ ansible_env.HOME}}" 
+username: "{{ ansible_env.LOGNAME }}"
