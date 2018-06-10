@@ -6,7 +6,7 @@
 
 - name: Install .tmux.git
   git:
-    repo: "https://github.com/gpakosz/.tmux.git"
+    repo: "{{ tmux_repo }}"
     dest: "{{ homepath }}/.tmux"
   become_user: "{{ username }}"
 
@@ -25,7 +25,7 @@
 
 - name: Install liquidpormpt
   git:
-    repo: "https://github.com/nojhan/liquidprompt.git"
+    repo: "{{ liquidprompt_repo }}"
     dest: "{{ homepath }}/.liquidprompt"
   become_user: "{{ username }}"
 

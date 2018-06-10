@@ -6,3 +6,5 @@ tools:
   - wget
   - rsync
   - tmux
+liquidprompt_repo: "https://github.com/nojhan/liquidprompt.git"
+tmux_repo: "https://github.com/gpakosz/.tmux.git"
